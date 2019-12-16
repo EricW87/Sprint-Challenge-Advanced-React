@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+
+.player-name {
+  text-align: left;
+  width: 30%;
+}

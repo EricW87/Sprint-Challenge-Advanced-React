@@ -4,10 +4,10 @@ const PlayerCard = (props) => {
     const player = props.player;
     return (
         <tr className="player">
-            <th>{player.name}</th>
-            <th>{player.country}</th>
-            <th>{player.searches}</th>
-            <th>{player.id}</th>
+            <td class="player-name">{player.name}</td>
+            <td>{player.country}</td>
+            <td>{player.searches}</td>
+            <td>{player.id}</td>
         </tr>
     );
 };
