@@ -1,19 +1,26 @@
-import React from "react";
-import * as rtl from '@testing-library/react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import * as rtl from "@testing-library/react";
+import { waitForElement } from "@testing-library/react";
 import App from './App';
-import PlayerClass from './components/PlayerClass';
+import PlayerList from './components/PlayerList.js';
 
-test("renders without crashing", () => {
-  const container = rtl.render(<App />);
-  container.getByText(/Reset/i);
-
-  container.getByText(/Filter by Name/i);
-
-  container.getByTestId(/Name/i);
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
 
-test("Name Search", () => {
-  const container = rtl.render(<PlayerClass country={Brazil} name={Formiga}/>)
-  container.getByText(/Formiga/i);
-  container.getByText(/Brazil/i);
+test("Find Hedvig Lindahl", async () => {
+    const wrapper = rtl.render(<App />);
+    const player = await waitForElement(() =>
+      wrapper.queryByText(/hedvig lindahl/i)
+  );
+  expect(player).toBeTruthy();
+});
+
+test("loads component playerlist and find hotdoy", () => {
+  const app = rtl.render(<PlayerList players={[{name: "hotdog", country: "Maryland", searches: 0, key: "fake"}]}/>);
+  const name = app.getByText(/hotdog/i);
+  expect(name).toBeTruthy();
 });

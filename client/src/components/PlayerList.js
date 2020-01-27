@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerCard from './PlayerCard.js';
+import PlayerCard, {AltPlayerCard} from './PlayerCard.js';
 
 const PlayerList = (props) => {
 
@@ -19,23 +19,38 @@ const PlayerList = (props) => {
         );
     }
 
-    return (
-        <table className="player-list">
-            <thead>
-                <tr>
-                    <th class="player-name">Name</th>
-                    <th>Country</th>
-                    <th>Searches</th>
-                    <th>ID</th>
-                </tr>
-            </thead>
-            <tbody>
-            {players.map((player) => 
-                <PlayerCard key={player.id} player={player} />
-            )}
-            </tbody>
-        </table>
-    );
+    if(!props.altview)
+        return (
+            <>
+                <h1 className="players-title">Players List</h1>
+                <table className="player-list">
+                    <thead>
+                        <tr>
+                            <th className="player-name">Name</th>
+                            <th>Country</th>
+                            <th>Searches</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {players.map((player) => 
+                        <PlayerCard key={player.id} player={player} />
+                    )}
+                    </tbody>
+                </table>
+            </>
+        );
+    else if(props.altview)
+        return (
+            <>
+                <h1 className="players-title">Players</h1>
+                <div className="Alt-Player-List">
+                    {players.map((player) => 
+                        <AltPlayerCard key={player.id} player={player} />
+                    )}
+                </div>
+            </>
+        )
 };
 
 export default PlayerList;

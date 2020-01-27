@@ -22,13 +22,14 @@ class  PlayerClass extends React.Component {
         });
     };
   
+
     render() {
         if(!this.state.players) return null;
   
         return (
-          <div className="App">
-            <PlayerList country={this.props.country} name={this.props.name} players={this.state.players} />
-          </div>
+          <>
+            <PlayerList country={this.props.country} name={this.props.name} players={this.state.players} altview={this.props.altview}/>
+          </>
       );
     }
   }
