@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import PlayerClass from './components/PlayerClass.js';
+import {useInput} from './components/UseInput.js';
+import useAltView from './components/AltView.js';
 import './App.css';
 
 function App() {
+
+  const [country, setCountry, handleCountry] = useInput("country", null);
+  const [name, setName, handleName] = useInput("name", null);
+  const [altview, setAltView] = useAltView(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={e=>setName(null)}>
+        <label>Filter by Name</label>
+        <input type= "text" onChange={e => handleName(e.target.value)} />
+        <button type="submit">Reset</button>
+      </form>
+      <form onSubmit={e=>setCountry(null)}>
+        <label>Filter by Country</label>
+        <input type= "text" onChange={e => handleCountry(e.target.value)} />
+        <button type="submit">Reset</button>
+      </form>
+      <button id='test-me' onClick={() => setAltView()}>Change View</button>
+      <PlayerClass country={country} name={name} altview={altview}/>
     </div>
   );
 }
